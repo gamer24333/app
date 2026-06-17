@@ -34,14 +34,14 @@ def home():
         return "Gespeichert!"
 
     return """
-    <h2>Registrierung</h2>
+    <h2>Bill Drink Login</h2>
     <form method="post">
         <input name="email" placeholder="Email">
         <input name="password" type="password" placeholder="Passwort">
         <button>Senden</button>
     </form>
 
-    <a href="/liste">Zur Liste</a>
+    
     """
 
 @app.route("/liste")
@@ -60,6 +60,7 @@ def liste():
             Email: {d[1]} | Passwort: {d[2]}
             <a href="/delete/{d[0]}">❌ löschen</a>
         </p>
+        <a href=/>Zurück</a>
         """
 
     return html
