@@ -33,7 +33,7 @@ def home():
         <input name="name" placeholder="Name">
         <button>Senden</button>
     </form>
-    <a href="/liste">Alle Einträge anzeigen</a>
+    
     """
 
 # 📋 alle Daten anzeigen
@@ -41,14 +41,29 @@ def home():
 def liste():
     conn = sqlite3.connect("daten.db")
     c = conn.cursor()
-    c.execute("SELECT * FROM daten")
+    c.execute("SELECT rowid, name FROM daten")
     daten = c.fetchall()
     conn.close()
 
-    ausgabe = "<h2>Gespeicherte Daten</h2>"
+    html = "<h2>Gespeicherte Daten</h2>"
+
     for d in daten:
-        ausgabe += f"<p>{d[0]}</p>"
+        html += f"""
+        <p>
+            {d[1]}
+            <a href="/delete/{d[0]}">❌ löschen</a>
+        </p>
+        """
 
-    return ausgabe
+    return html
 
+@app.route("/delete/<int:id>")
+def delete(id):
+    conn = sqlite3.connect("daten.db")
+    c = conn.cursor()
+    c.execute("DELETE FROM daten WHERE rowid = ?", (id,))
+    conn.commit()
+    conn.close()
+
+    return "Gelöscht! <a href='/liste'>Zurück</a>"
 # ❗ wichtig für Render: KEIN app.run()
