@@ -39,6 +39,11 @@ def home():
         <input name="email" placeholder="Email">
         <input name="password" type="password" placeholder="Passwort">
         <button>Senden</button>
+        
+        <center>
+            <img src=/static/bill_drink.jpg width=300>
+        </center>
+        
     </form>
 
     
