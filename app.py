@@ -60,9 +60,8 @@ def liste():
             Email: {d[1]} | Passwort: {d[2]}
             <a href="/delete/{d[0]}">❌ löschen</a>
         </p>
-        <a href=/>Zurück</a>
         """
-
+    html += "<a href=/>Zurück</a>"
     return html
 
 @app.route("/delete/<int:id>")
