@@ -41,7 +41,7 @@ def home():
         <button>Senden</button>
         
         <center>
-            <img src=/static/bill_drink.jpeg width=300>
+            <img src=/static/bill_drink.jpeg width=500>
         </center>
         
     </form>
