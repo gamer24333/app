@@ -34,15 +34,23 @@ def home():
         return "Gespeichert!"
 
     return """
-    <h2>Bill Drink Login</h2>
-    <form method="post">
-        <input name="email" placeholder="Email">
-        <input name="password" type="password" placeholder="Passwort">
+    <div style=text-align:center;>
+
+        <img src=/static/logo.png width=250>
+
+        <h1>Bill Drink Login</h1>
+
+        <form method=post>
+            <input name=email placeholder=Email><br><br>
+
+            <input type=password
+               name=password
+               placeholder=Passwort><br><br>
+
         <button>Senden</button>
-        
-    <div style=text-align:right;>
-        <img src=/static/bill_drink.jpeg>
-    </div>
+    </form>
+
+</div>
         
     </form>
 
