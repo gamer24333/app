@@ -36,7 +36,7 @@ def home():
     return """
     <div style=text-align:center;>
 
-        <img src=/static/logo.png width=250>
+        <img src=/static/bill_drink.jpeg width=250>
 
         <h1>Bill Drink Login</h1>
 
