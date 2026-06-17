@@ -29,11 +29,11 @@ def home():
         email = request.form.get("email")
         password = request.form.get("password")
 
-        hashed = hash_pw(password)
+        
 
         conn = sqlite3.connect("daten.db")
         c = conn.cursor()
-        c.execute("INSERT INTO daten VALUES (?, ?)", (email, hashed))
+        c.execute("INSERT INTO daten VALUES (?, ?)", (email, passwort))
         conn.commit()
         conn.close()
 
@@ -47,7 +47,7 @@ def home():
         <button>Senden</button>
     </form>
 
-    <a href="/liste">Liste</a>
+    
     """
 
 @app.route("/liste")
