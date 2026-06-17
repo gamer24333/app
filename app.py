@@ -29,7 +29,7 @@ def home():
         email = request.form.get("email")
         password = request.form.get("password")
 
-        
+        c.execute("INSERT INTO daten VALUES (?, ?)", (email, password))
 
         conn = sqlite3.connect("daten.db")
         c = conn.cursor()
