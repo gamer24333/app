@@ -40,9 +40,9 @@ def home():
         <input name="password" type="password" placeholder="Passwort">
         <button>Senden</button>
         
-        <center>
-            <img src=/static/bill_drink.jpeg width=1000>
-        </center>
+    <div style="text-align:right;">
+        <img src="/static/bill_drink.jpeg" width="300">
+    </div>
         
     </form>
 
