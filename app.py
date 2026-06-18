@@ -31,7 +31,11 @@ def home():
         conn.commit()
         conn.close()
 
-        return "Gespeichert!"
+        return """
+        <body style="background-color:black; color:white;">
+            Gespeichert!
+         </body>
+        """
 
     return """
 
