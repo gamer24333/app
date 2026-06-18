@@ -167,7 +167,11 @@ def delete(id):
     return """
     <body style="background-color:black; color:white; text-align:center;">
         Gelöscht! <a href='/liste' style="color:white;">Zurück</a>
+
+
+        
     </body>
     """
 
-# ❗ kein app.run() wegen Render
+if __name__ == "__main__":
+    app.run()
