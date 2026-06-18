@@ -4,7 +4,7 @@ import os
 
 
 app = Flask(__name__)
-DB_PATH = os.path.join("/tmp", "daten.db")
+DB_PATH =  "/opt/render/project/src/daten.db"
 # 🧱 DB erstellen
 def init_db():
     conn = sqlite3.connect(DB_PATH)
@@ -18,8 +18,8 @@ def init_db():
     conn.commit()
     conn.close()
 
-if __name__ == "__main__":
-    init_db()
+
+init_db()
 
 
 
