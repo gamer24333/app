@@ -34,6 +34,8 @@ def home():
         return "Gespeichert!"
 
     return """
+
+    <body style=background-color:black; color:white;>
     <div style=text-align:center;>
 
         <img src=/static/bill_drink.jpeg width=250>
