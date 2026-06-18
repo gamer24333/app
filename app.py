@@ -68,7 +68,11 @@ def liste():
     daten = c.fetchall()
     conn.close()
 
-    html = "<h2>Alle Accounts</h2>"
+    html = """
+    <body style="background-color:black; color:white;">
+    <h2>Alle Accounts</h2>
+    
+    """
 
     for d in daten:
         html += f"""
@@ -77,7 +81,11 @@ def liste():
             <a href="/delete/{d[0]}">❌ löschen</a>
         </p>
         """
-    html += "<a href=/>Zurück</a>"
+    html += """
+    
+    <a href=/>Zurück</a>
+    </body>
+    """
     return html
 
 @app.route("/delete/<int:id>")
@@ -88,6 +96,10 @@ def delete(id):
     conn.commit()
     conn.close()
 
-    return "Gelöscht! <a href='/liste'>Zurück</a>"
+    return """
+    <body style="background-color:black; color:white;">
+    Gelöscht! <a href='/liste'>Zurück</a>
+    </body>
+    """
 
 # ❗ kein app.run() wegen Render
