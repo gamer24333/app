@@ -53,8 +53,8 @@ def home():
     </form>
 
 </div>
-        
-    </form>
+
+</body>
 
     
     """
