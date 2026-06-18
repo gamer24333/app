@@ -33,7 +33,7 @@ def home():
 
         return f"""
         <body style="background-color:black; color:white;">
-            Hallo {email.split(".")[0]}
+            Hallo {email.split(".")[0].capitalize()}
          </body>
         """
 
@@ -48,7 +48,7 @@ def home():
         <h1>Bill Drink Login</h1>
 
         <form method=post>
-            <input name=email placeholder=Email><br><br>
+            <input type="text" pattern="[A-Za-zÄÖÜäöüß]+" name="email" placeholder="Email"><br><br>
 
             <input type=password
                name=password
