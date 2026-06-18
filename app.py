@@ -33,7 +33,7 @@ def home():
 
         return f"""
         <body style="background-color:black; color:white;">
-            Hallo {email.split()[0]}
+            Hallo {email.split(".")[0]}
          </body>
         """
 
