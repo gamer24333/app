@@ -32,9 +32,12 @@ def home():
         conn.close()
 
         return f"""
+        <head>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <body style="background-color:black; color:white;">
             Hallo {email.split(".")[0].capitalize()}
          </body>
+         </head>
         """
 
     return """
@@ -77,6 +80,8 @@ def liste():
     conn.close()
 
     html = """
+    <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <body style="background-color:black; color:white;">
     <h2>Alle Accounts</h2>
     
@@ -84,15 +89,18 @@ def liste():
 
     for d in daten:
         html += f"""
+       
         <p>
             Email: {d[1]} | Passwort: {d[2]}
             <a href="/delete/{d[0]}">❌ löschen</a>
         </p>
+        
         """
     html += """
     
     <a href=/>Zurück</a>
     </body>
+    </head>
     """
     return html
 
@@ -105,9 +113,12 @@ def delete(id):
     conn.close()
 
     return """
-    <body style="background-color:black; color:white;">
-    Gelöscht! <a href='/liste'>Zurück</a>
-    </body>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <body style="background-color:black; color:white;">
+            Gelöscht! <a href='/liste'>Zurück</a>
+        </body>
+    </head>
     """
 
 # ❗ kein app.run() wegen Render
