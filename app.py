@@ -31,9 +31,9 @@ def home():
         conn.commit()
         conn.close()
 
-        return """
+        return f"""
         <body style="background-color:black; color:white;">
-            Gespeichert!
+            Hallo {email.split()[0]}
          </body>
         """
 
