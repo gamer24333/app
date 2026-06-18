@@ -1,11 +1,14 @@
 from flask import Flask, request, redirect
 import sqlite3
+import os
+
 
 app = Flask(__name__)
-
+print("APP STARTED")
 # 🧱 DB erstellen
 def init_db():
-    conn = sqlite3.connect("daten.db")
+    DB_PATH = os.path.join("/tmp", "daten.db")
+    conn = sqlite3.connect(DB_PATH)
     c = conn.cursor()
     c.execute("""
     CREATE TABLE IF NOT EXISTS users (
@@ -16,7 +19,8 @@ def init_db():
     conn.commit()
     conn.close()
 
-init_db()
+if __name__ == "__main__":
+    init_db()
 
 
 
@@ -28,7 +32,7 @@ def home():
         password = request.form.get("password")
 
         # 💾 User speichern
-        conn = sqlite3.connect("daten.db")
+        conn = sqlite3.connect(DB_PATH)
         c = conn.cursor()
         c.execute("INSERT INTO users VALUES (?, ?)", (email, password))
         conn.commit()
@@ -76,7 +80,7 @@ def login():
         email = request.form.get("email")
         password = request.form.get("password")
 
-        conn = sqlite3.connect("daten.db")
+        conn = sqlite3.connect(DB_PATH)
         c = conn.cursor()
         c.execute("SELECT * FROM users WHERE email=? AND password=?", (email, password))
         user = c.fetchone()
@@ -125,7 +129,7 @@ def login():
 # 📋 LISTE (nur für dich)
 @app.route("/liste")
 def liste():
-    conn = sqlite3.connect("daten.db")
+    conn = sqlite3.connect(DB_PATH)
     c = conn.cursor()
     c.execute("SELECT rowid, email, password FROM users")
     daten = c.fetchall()
@@ -155,7 +159,7 @@ def liste():
 # ❌ DELETE
 @app.route("/delete/<int:id>")
 def delete(id):
-    conn = sqlite3.connect("daten.db")
+    conn = sqlite3.connect(DB_PATH)
     c = conn.cursor()
     c.execute("DELETE FROM users WHERE rowid = ?", (id,))
     conn.commit()
