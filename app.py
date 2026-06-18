@@ -37,7 +37,7 @@ def home():
 
     
     <div style=text-align:center;>
-    <body style=background-color:black; color:white;>
+    <body style="background-color:black; color:white;">
 
         <img src=/static/bill_drink.jpeg width=250>
 
