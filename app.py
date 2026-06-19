@@ -37,8 +37,14 @@ def home():
         if c.fetchone():
             conn.commit()
             conn.close()
-            return """ <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-            Diese E-Mail existiert bereits. 
+            return """ 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <body style="background-color:black; color:white;">
+            <script>
+                alert("Diese E-Mail existiert bereits!");
+                window.location.href = "/";
+            </script>
+        </body>
             """
         else:
             c.execute("INSERT INTO users VALUES (?, ?)", (email, password))
