@@ -33,17 +33,25 @@ def home():
         # 💾 User speichern
         conn = sqlite3.connect(DB_PATH)
         c = conn.cursor()
-        c.execute("INSERT INTO users VALUES (?, ?)", (email, password))
-        conn.commit()
-        conn.close()
-
-        return f"""
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <body style="background-color:black; color:white; text-align:center;">
-            <h1>Account erstellt!</h1>
-            <a href="/login">Zum Login</a>
-        </body>
-        """
+        c.execute("SELECT * FROM users WHERE email=?", (email,))
+        if c.fetchone():
+            conn.commit()
+            conn.close()
+            return """ <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+            Diese E-Mail existiert bereits. 
+            """
+        else:
+            c.execute("INSERT INTO users VALUES (?, ?)", (email, password))
+            conn.commit()
+            conn.close()
+    
+            return f"""
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <body style="background-color:black; color:white; text-align:center;">
+                <h1>Account erstellt!</h1>
+                <a href="/login">Zum Login</a>
+            </body>
+            """
 
     return """
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
