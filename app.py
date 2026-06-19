@@ -1,9 +1,11 @@
-from flask import Flask, request, redirect
+from flask import Flask, request, redirect, session
 import sqlite3
-import os
+
 
 
 app = Flask(__name__)
+app.secret_key = "mein_geheimes_passwort"
+
 DB_PATH =  "/opt/render/project/src/daten.db"
 # 🧱 DB erstellen
 def init_db():
@@ -89,6 +91,9 @@ def home():
 # 🔵 LOGIN
 @app.route("/login", methods=["GET", "POST"])
 def login():
+    if "email" in session:
+        return redirect("/account")
+        
     if request.method == "POST":
         email = request.form.get("email")
         password = request.form.get("password")
@@ -100,6 +105,9 @@ def login():
         conn.close()
 
         if user:
+            session["email"] = email
+            return redirect("/account")
+            
             return f"""
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <body style="background-color:black; color:white; text-align:center;">
@@ -109,6 +117,7 @@ def login():
             """
         else:
             return """
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <body style="background-color:black; color:white; text-align:center;">
                 <h1>Falsche Daten</h1>
                 <a href="/login" style="color:white;">Zurück</a>
@@ -139,8 +148,18 @@ def login():
     </body>
     """
 
+
+
+@app.route("/logout")
+def logout():
+    session.clear()
+    return redirect("/login")
 # 📋 LISTE (nur für dich)
 @app.route("/liste")
+
+
+
+
 def liste():
     conn = sqlite3.connect(DB_PATH)
     c = conn.cursor()
@@ -169,6 +188,21 @@ def liste():
     """
     return html
 
+
+@app.route("/account")
+def account():
+
+    if "email" not in session:
+        return redirect("/login")
+
+    return f"""
+    <body style="background-color:black; color:white; text-align:center;">
+        <h1>Willkommen {session["email"]}</h1>
+
+        <a href="/logout" style="color:white;">Logout</a>
+    </body>
+    """
+    
 # ❌ DELETE
 @app.route("/delete/<int:id>")
 def delete(id):
