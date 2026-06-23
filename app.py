@@ -243,7 +243,7 @@ def produkt(name):
 
         <p>Preis: 1,99 €</p>
 
-        <button onclick= "alert("Die kaufen Funktion kommt bald!")">Kaufen</button>
+        <button onclick= "alert('Die kaufen Funktion kommt bald!')">Kaufen</button>
 
         <br><br>
 
