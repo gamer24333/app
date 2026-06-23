@@ -215,15 +215,15 @@ def shop():
         <h1>Bill Drinks Shop</h1>
 
         <a href="/produkt/apfel_kirsche">
-            <img src="/static/apfel.jpg" width="200">
+            <img src="/static/bill_drinks_apfel_kirsche.jpg" width="200">
         </a>
 
         <a href="/produkt/duran_orange">
-            <img src="/static/kirsche.jpg" width="200">
+            <img src="/static/bill_drinks_duran_orange.jpg" width="200">
         </a>
 
         <a href="/produkt/melone_mango">
-            <img src="/static/orange.jpg" width="200">
+            <img src="/static/bill_drinks_melone_mango.jpg" width="200">
         </a>
 
         <br><br>
