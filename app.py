@@ -215,15 +215,15 @@ def shop():
         <h1>Bill Drinks Shop</h1>
 
         <a href="/produkt/apfel_kirsche">
-            <img src="/static/bill_drinks_apfel_kirsche.jpg" width="200">
+            <img src="/static/bill_drinks_apfel_kirsche.jpeg" width="200">
         </a>
 
         <a href="/produkt/duran_orange">
-            <img src="/static/bill_drinks_duran_orange.jpg" width="200">
+            <img src="/static/bill_drinks_duran_orange.jpeg" width="200">
         </a>
 
         <a href="/produkt/melone_mango">
-            <img src="/static/bill_drinks_melone_mango.jpg" width="200">
+            <img src="/static/bill_drinks_melone_mango.jpeg" width="200">
         </a>
 
         <br><br>
@@ -232,6 +232,25 @@ def shop():
 
     </body>
     """
+    
+@app.route("/produkt/<name>")
+def produkt(name):
+
+    return f"""
+    <body style="background-color:black; color:white; text-align:center;">
+
+        <h1>{name.capitalize()} Bill Drink</h1>
+
+        <p>Preis: 1,99 €</p>
+
+        <button>Kaufen</button>
+
+        <br><br>
+
+        <a href="/shop" style="color:white;">Zurück</a>
+
+    </body>
+    """   
     
 # ❌ DELETE
 @app.route("/delete/<int:id>")
