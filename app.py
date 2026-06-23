@@ -239,7 +239,7 @@ def produkt(name):
     return f"""
     <body style="background-color:black; color:white; text-align:center;">
 
-        <h1>{name.capitalize()} Bill Drink</h1>
+        <h1>{" ".join(name.capitalize().split("_"))} Bill Drink</h1>
 
         <p>Preis: 1,99 €</p>
 
