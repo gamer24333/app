@@ -92,7 +92,7 @@ def home():
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if "email" in session:
-        return redirect("/account")
+        return redirect("/shop")
         
     if request.method == "POST":
         email = request.form.get("email")
