@@ -106,7 +106,7 @@ def login():
 
         if user:
             session["email"] = email
-            return redirect("/account")
+            return redirect("/shop")
             
             return f"""
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -200,6 +200,36 @@ def account():
         <h1>Willkommen {session["email"]}</h1>
 
         <a href="/logout" style="color:white;">Logout</a>
+    </body>
+    """
+    
+@app.route("/shop")
+def shop():
+
+    if "email" not in session:
+        return redirect("/login")
+
+    return """
+    <body style="background-color:black; color:white; text-align:center;">
+
+        <h1>Bill Drinks Shop</h1>
+
+        <a href="/produkt/apfel_kirsche">
+            <img src="/static/apfel.jpg" width="200">
+        </a>
+
+        <a href="/produkt/duran_orange">
+            <img src="/static/kirsche.jpg" width="200">
+        </a>
+
+        <a href="/produkt/melone_mango">
+            <img src="/static/orange.jpg" width="200">
+        </a>
+
+        <br><br>
+
+        <a href="/logout" style="color:white;">Logout</a>
+
     </body>
     """
     
