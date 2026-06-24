@@ -154,12 +154,10 @@ def login():
 def logout():
     session.clear()
     return redirect("/login")
+
+
 # 📋 LISTE (nur für dich)
 @app.route("/liste")
-
-
-
-
 def liste():
     conn = sqlite3.connect(DB_PATH)
     c = conn.cursor()
