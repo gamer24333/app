@@ -277,6 +277,11 @@ def delete(id):
 
     gelöschte_email = result[0]
 
+    # Nur eigenen Account löschen lassen
+    if session["email"] != gelöschte_email:
+        conn.close()
+        return "Nicht erlaubt"
+
     # Session löschen
     session.clear()
 
@@ -284,6 +289,8 @@ def delete(id):
     c.execute("DELETE FROM users WHERE id = ?", (id,))
     conn.commit()
     conn.close()
+
+    
 
    
 
