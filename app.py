@@ -290,6 +290,10 @@ def shop():
             <img src="/static/bill_drinks_ananas_drachenfrucht.jpeg">
         </a>
 
+        <a href="/produkt/erdbeere_blaubeere">
+            <img src="/static/bill_drinks_erdbeere_blaubeere.jpeg">
+        </a>
+
     </div>
 
     <a class="logout" href="/logout">Logout</a>
