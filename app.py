@@ -25,7 +25,7 @@ def init_db():
 init_db()
 
 
-# 🔥 SESSION CHECK (WICHTIG!)
+# 🔥 SESSION CHECK (NEU WICHTIG)
 def check_user():
     if "email" not in session:
         return False
@@ -57,6 +57,7 @@ def home():
         if c.fetchone():
             conn.close()
             return """
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <body style="background-color:black; color:white;">
                 <script>
                     alert("Diese E-Mail existiert bereits!");
@@ -65,36 +66,41 @@ def home():
             </body>
             """
 
-        c.execute(
-            "INSERT INTO users (email, password) VALUES (?, ?)",
-            (email, password)
-        )
-
+        c.execute("INSERT INTO users (email, password) VALUES (?, ?)", (email, password))
         conn.commit()
         conn.close()
 
         return """
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <body style="background-color:black; color:white; text-align:center;">
             <h1>Account erstellt!</h1>
-            <a href="/login" style="color:white;">Zum Login</a>
+            <a href="/login">Zum Login</a>
         </body>
         """
 
     return """
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <body style="background-color:black; color:white; text-align:center;">
-     <img src="/static/bill_drinks.jpeg" width="250">
+
+        <img src="/static/bill_drinks.jpeg" width="250">
+
         <h1>Register</h1>
+
         <form method="post">
             <input name="email" placeholder="Email"><br><br>
             <input type="password" name="password" placeholder="Passwort"><br><br>
             <button>Registrieren</button>
         </form>
-        <a href="/login" style="color:white;">Login</a>
+
+        <br>
+        <a href="/login" style="color:white;">Zum Login</a>
+
     </body>
     """
 
 
-# 🔵 LOGIN
+# 🔵 LOGIN (FIXED)
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if "email" in session:
@@ -106,10 +112,7 @@ def login():
 
         conn = sqlite3.connect(DB_PATH)
         c = conn.cursor()
-        c.execute(
-            "SELECT * FROM users WHERE email=? AND password=?",
-            (email, password)
-        )
+        c.execute("SELECT * FROM users WHERE email=? AND password=?", (email, password))
         user = c.fetchone()
         conn.close()
 
@@ -125,14 +128,21 @@ def login():
         """
 
     return """
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <body style="background-color:black; color:white; text-align:center;">
+
         <h1>Login</h1>
+
         <form method="post">
             <input name="email" placeholder="Email"><br><br>
             <input type="password" name="password" placeholder="Passwort"><br><br>
             <button>Login</button>
         </form>
-        <a href="/">Register</a>
+
+        <br>
+        <a href="/" style="color:white;">Registrieren</a>
+
     </body>
     """
 
@@ -144,7 +154,7 @@ def logout():
     return redirect("/login")
 
 
-# 📋 LISTE
+# 📋 LISTE (FIXED mit Check)
 @app.route("/liste")
 def liste():
     if not check_user():
@@ -157,6 +167,7 @@ def liste():
     conn.close()
 
     html = """
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <body style="background-color:black; color:white; text-align:center;">
         <h2>Alle Accounts (DEBUG)</h2>
     """
@@ -170,6 +181,7 @@ def liste():
         """
 
     html += """
+        <br>
         <a href="/" style="color:white;">Zurück</a>
     </body>
     """
@@ -177,13 +189,14 @@ def liste():
     return html
 
 
-# 👤 ACCOUNT
+# 👤 ACCOUNT (FIXED)
 @app.route("/account")
 def account():
     if not check_user():
         return redirect("/login")
 
     return f"""
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <body style="background-color:black; color:white; text-align:center;">
         <h1>Willkommen {session["email"]}</h1>
         <a href="/logout" style="color:white;">Logout</a>
@@ -191,13 +204,15 @@ def account():
     """
 
 
-# 🛒 SHOP
+# 🛒 SHOP (FIXED Schutz)
 @app.route("/shop")
 def shop():
     if not check_user():
         return redirect("/login")
 
     return """
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <body style="background-color:black; color:white; text-align:center;">
 
         <h1>Bill Drinks Shop</h1>
@@ -224,9 +239,11 @@ def shop():
 @app.route("/produkt/<name>")
 def produkt(name):
     return f"""
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <body style="background-color:black; color:white; text-align:center;">
 
         <h1>{" ".join(name.split("_")).title()}</h1>
+
         <p>Preis: 1,99 €</p>
 
         <button onclick="alert('Die kaufen Funktion kommt bald!')">Kaufen</button>
@@ -238,7 +255,7 @@ def produkt(name):
     """
 
 
-# ❌ DELETE
+# ❌ DELETE (FIXED + SAFE)
 @app.route("/delete/<int:id>")
 def delete(id):
     if not check_user():
@@ -273,7 +290,6 @@ def delete(id):
     """
 
 
-# 🚀 START
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
     app.run(host="0.0.0.0", port=port)
