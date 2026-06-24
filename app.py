@@ -210,46 +210,36 @@ def shop():
     if not check_user():
         return redirect("/login")
 
-    return """
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    products = [
+        ("apfel_kirsche", "bill_drinks_apfel_kirsche.jpeg"),
+        ("duran_orange", "bill_drinks_duran_orange.jpeg"),
+        ("melone_mango", "bill_drinks_melone_mango.jpeg"),
+        ("pflaume_kokosnuss", "bill_drinks_pflaume_kokosnuss.jpeg"),
+        ("ananas_drachenfrucht", "bill_drinks_ananas_drachenfrucht.jpeg"),
+        ("erdbeere_blaubeere", "bill_drinks_erdbeere_blaubeere.jpeg"),
+    ]
 
+    html = """
     <body style="background-color:black; color:white; text-align:center;">
-
         <h1>Bill Drinks Shop</h1>
-
         <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:25px;">
+    """
 
-            <a 
-                href="/produkt/apfel_kirsche"><img src="/static/bill_drinks_apfel_kirsche.jpeg" width="200" style="height:400px; object-fit:cover;">
-            </a>
-            
-            <a 
-                href="/produkt/duran_orange"><img src="/static/bill_drinks_duran_orange.jpeg" width="200" style="height:400px; object-fit:cover;">
-            </a>
-            
-            <a 
-                href="/produkt/melone_mango"><img src="/static/bill_drinks_melone_mango.jpeg" width="200" style="height:400px; object-fit:cover;">
-            </a>
-            
-            <a 
-                href="/produkt/pflaume_kokosnuss"><img src="/static/bill_drinks_pflaume_kokosnuss.jpeg" width="200" style="height:400px; object-fit:cover;">
-            </a>
-            
-            <a 
-                href="/produkt/ananas_drachenfrucht"><img src="/static/bill_drinks_ananas_drachenfrucht.jpeg" width="200" style="height:400px; object-fit:cover;">
-            </a>
-            
-            <a 
-                href="/produkt/erdbeere_blaubeere"><img src="/static/bill_drinks_erdbeere_blaubeere.jpeg" width="200" style="height:400px; object-fit:cover;">
-            </a>
+    for name, img in products[:5]:  # 👈 HIER LIMIT
+        html += f"""
+        <a href="/produkt/{name}">
+            <img src="/static/{img}" width="200" style="height:400px; object-fit:cover;">
+        </a>
+        """
 
+    html += """
         </div>
-
         <br>
         <a href="/logout" style="color:white;">Logout</a>
-
     </body>
     """
+
+    return html
 
 
 # 🧃 PRODUKT
