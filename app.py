@@ -262,17 +262,30 @@ def produkt(name):
 def delete(id):
     conn = sqlite3.connect(DB_PATH)
     c = conn.cursor()
-    if "email" in session:
-        c.execute("SELECT * FROM users WHERE rowid = ?", (id,))
-        result = c.fetchone()
-        gelöschte_email = result[1]
-        if session["email"] == gelöschte_email:
-            session.clear()
-    c.execute("DELETE FROM users WHERE rowid = ?", (id,))
-   
-            
+
+    if "email" not in session:
+        conn.close()
+        return "Nicht eingeloggt"
+
+    # User holen
+    c.execute("SELECT email FROM users WHERE id = ?", (id,))
+    result = c.fetchone()
+
+    if not result:
+        conn.close()
+        return "User nicht gefunden"
+
+    gelöschte_email = result[0]
+
+    # Session löschen
+    session.clear()
+
+    # User löschen
+    c.execute("DELETE FROM users WHERE id = ?", (id,))
     conn.commit()
     conn.close()
+
+   
 
     return """
     <body style="background-color:black; color:white; text-align:center;">
