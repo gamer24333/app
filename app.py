@@ -8,8 +8,7 @@ app = Flask(__name__)
 app.secret_key = "mein_geheimes_passwort"
 
 DB_PATH =  "/opt/render/project/src/daten.db"
-print("DB existiert:", os.path.exists(DB_PATH))
-print("DB Größe:", os.path.getsize(DB_PATH) if os.path.exists(DB_PATH) else 0)
+
 # 🧱 DB erstellen
 def init_db():
     conn = sqlite3.connect(DB_PATH)
@@ -264,7 +263,7 @@ def delete(id):
     conn = sqlite3.connect(DB_PATH)
     c = conn.cursor()
     if "email" in session:
-        c.execute("SELECT * FROM users WHERE id = ?", (id,))
+        c.execute("SELECT * FROM users WHERE rowid = ?", (id,))
         result = cursor.fetchone()
         gelöschte_email = result[1]
         if session["email"] == gelöschte_email:
