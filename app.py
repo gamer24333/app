@@ -52,7 +52,7 @@ def home():
         </body>
             """
         else:
-            c.execute("INSERT INTO users VALUES (?, ?)", (email, password))
+            c.execute( "INSERT INTO users (email, password) VALUES (?, ?)", (email, password))
             conn.commit()
             conn.close()
     
