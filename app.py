@@ -182,7 +182,7 @@ def liste():
 
     html += """
         <br>
-        <a href="/" style="color:white;">Zurück</a>
+        <button onclick='history.back()'>Zurück</button>
     </body>
     """
 
@@ -219,12 +219,29 @@ def shop():
 
         <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:25px;">
 
-            <a href="/produkt/apfel_kirsche"><img src="/static/bill_drinks_apfel_kirsche.jpeg" width="200" style="height:400px; object-fit:cover;"></a>
-            <a href="/produkt/duran_orange"><img src="/static/bill_drinks_duran_orange.jpeg" width="200" style="height:400px; object-fit:cover;"></a>
-            <a href="/produkt/melone_mango"><img src="/static/bill_drinks_melone_mango.jpeg" width="200" style="height:400px; object-fit:cover;"></a>
-            <a href="/produkt/pflaume_kokosnuss"><img src="/static/bill_drinks_pflaume_kokosnuss.jpeg" width="200" style="height:400px; object-fit:cover;"></a>
-            <a href="/produkt/ananas_drachenfrucht"><img src="/static/bill_drinks_ananas_drachenfrucht.jpeg" width="200" style="height:400px; object-fit:cover;"></a>
-            <a href="/produkt/erdbeere_blaubeere"><img src="/static/bill_drinks_erdbeere_blaubeere.jpeg" width="200" style="height:400px; object-fit:cover;"></a>
+            <a 
+                href="/produkt/apfel_kirsche"><img src="/static/bill_drinks_apfel_kirsche.jpeg" width="200" style="height:400px; object-fit:cover;">
+            </a>
+            
+            <a 
+                href="/produkt/duran_orange"><img src="/static/bill_drinks_duran_orange.jpeg" width="200" style="height:400px; object-fit:cover;">
+            </a>
+            
+            <a 
+                href="/produkt/melone_mango"><img src="/static/bill_drinks_melone_mango.jpeg" width="200" style="height:400px; object-fit:cover;">
+            </a>
+            
+            <a 
+                href="/produkt/pflaume_kokosnuss"><img src="/static/bill_drinks_pflaume_kokosnuss.jpeg" width="200" style="height:400px; object-fit:cover;">
+            </a>
+            
+            <a 
+                href="/produkt/ananas_drachenfrucht"><img src="/static/bill_drinks_ananas_drachenfrucht.jpeg" width="200" style="height:400px; object-fit:cover;">
+            </a>
+            
+            <a 
+                href="/produkt/erdbeere_blaubeere"><img src="/static/bill_drinks_erdbeere_blaubeere.jpeg" width="200" style="height:400px; object-fit:cover;">
+            </a>
 
         </div>
 
