@@ -69,7 +69,7 @@ def home():
 
     <body style="background-color:black; color:white; text-align:center;">
 
-        <img src="/static/bill_drink.jpeg" width="250">
+        <img src="/static/bill_drinks.jpeg" width="250">
 
         <h1>Register</h1>
 
@@ -214,28 +214,87 @@ def shop():
         return redirect("/login")
 
     return """
+    <head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <body style="background-color:black; color:white; text-align:center;">
+    <title>Bill Drinks Shop</title>
 
-        <h1>Bill Drinks Shop</h1>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            text-align: center;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            margin-top: 20px;
+        }
+
+        .shop {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+            padding: 20px;
+        }
+
+        .shop a {
+            text-decoration: none;
+        }
+
+        .shop img {
+            width: 200px;
+            border-radius: 10px;
+            transition: transform 0.2s ease;
+        }
+
+        .shop img:hover {
+            transform: scale(1.05);
+        }
+
+        .logout {
+            color: white;
+            display: inline-block;
+            margin: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Bill Drinks Shop</h1>
+
+    <div class="shop">
 
         <a href="/produkt/apfel_kirsche">
-            <img src="/static/bill_drinks_apfel_kirsche.jpeg" width="200">
+            <img src="/static/bill_drinks_apfel_kirsche.jpeg">
         </a>
 
         <a href="/produkt/duran_orange">
-            <img src="/static/bill_drinks_duran_orange.jpeg" width="200">
+            <img src="/static/bill_drinks_duran_orange.jpeg">
         </a>
 
         <a href="/produkt/melone_mango">
-            <img src="/static/bill_drinks_melone_mango.jpeg" width="200">
+            <img src="/static/bill_drinks_melone_mango.jpeg">
         </a>
 
-        <br><br>
+        <a href="/produkt/pflaume_kokosnuss">
+            <img src="/static/bill_drinks_pflaume_kokosnuss.jpeg">
+        </a>
 
-        <a href="/logout" style="color:white;">Logout</a>
+        <a href="/produkt/ananas_drachenfrucht">
+            <img src="/static/bill_drinks_ananas_drachenfrucht.jpeg">
+        </a>
 
-    </body>
+    </div>
+
+    <a class="logout" href="/logout">Logout</a>
+
+</body>
+
+</html>
     """
     
 @app.route("/produkt/<name>")
