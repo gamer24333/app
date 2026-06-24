@@ -82,6 +82,7 @@ def home():
 
     return """
     <body style="background-color:black; color:white; text-align:center;">
+     <img src="/static/bill_drinks.jpeg" width="250">
         <h1>Register</h1>
         <form method="post">
             <input name="email" placeholder="Email"><br><br>
