@@ -198,11 +198,13 @@ def account():
         return redirect("/login")
 
     return f"""
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <body style="background-color:black; color:white; text-align:center;">
         <h1>Willkommen {session["email"]}</h1>
 
         <a href="/logout" style="color:white;">Logout</a>
     </body>
+    
     """
     
 @app.route("/shop")
@@ -212,6 +214,7 @@ def shop():
         return redirect("/login")
 
     return """
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <body style="background-color:black; color:white; text-align:center;">
 
         <h1>Bill Drinks Shop</h1>
@@ -239,6 +242,7 @@ def shop():
 def produkt(name):
 
     return f"""
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <body style="background-color:black; color:white; text-align:center;">
 
         <h1>{" ".join(name.split("_")).title()} Bill Drink</h1>
