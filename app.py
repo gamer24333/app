@@ -246,6 +246,8 @@ def shop():
 
         .shop img {
             width: 200px;
+            height: 200px;
+            object-fit: cover;
             border-radius: 10px;
             transition: transform 0.2s ease;
         }
