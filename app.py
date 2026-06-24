@@ -1,5 +1,6 @@
 from flask import Flask, request, redirect, session
 import sqlite3
+import os
 
 
 
@@ -7,6 +8,8 @@ app = Flask(__name__)
 app.secret_key = "mein_geheimes_passwort"
 
 DB_PATH =  "/opt/render/project/src/daten.db"
+print("DB existiert:", os.path.exists(DB_PATH))
+print("DB Größe:", os.path.getsize(DB_PATH) if os.path.exists(DB_PATH) else 0)
 # 🧱 DB erstellen
 def init_db():
     conn = sqlite3.connect(DB_PATH)
@@ -179,8 +182,9 @@ def liste():
         </p>
         """
 
-    html += """
+    html += f"""
         <br>
+        <h3>Anzahl Accounts: {len(daten)}</h3>
         <a href="/" style="color:white;">Zurück</a>
     </body>
     """
