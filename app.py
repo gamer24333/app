@@ -264,6 +264,13 @@ def delete(id):
     conn = sqlite3.connect(DB_PATH)
     c = conn.cursor()
     c.execute("DELETE FROM users WHERE rowid = ?", (id,))
+    if "email" in session:
+        c.execute("SELECT name FROM users WHERE id = ?", (id,))
+        result = cursor.fetchone()
+        gelöschte_email = result[1]
+        if session["email"] == gelöschte_email:
+            session.clear()
+            
     conn.commit()
     conn.close()
 
