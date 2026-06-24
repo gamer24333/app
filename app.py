@@ -5,7 +5,7 @@ import os
 
 
 app = Flask(__name__)
-app.secret_key = "mein_geheimes_passwort"
+app.secret_key = os.environ.get("SECRET_KEY")
 
 DB_PATH =  "/opt/render/project/src/daten.db"
 
