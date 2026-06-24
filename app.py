@@ -245,32 +245,64 @@ def shop():
     </body>
 
     <style>
-        body {
-            margin: 0;
-            font-family: Arial;
-        }
+    body {
+        margin: 0;
+        font-family: Arial;
+        overflow-x: hidden;
+    }
 
+    .shop {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 25px;
+        justify-items: center;
+        padding: 20px;
+    }
+
+    .shop img {
+        width: 200px;
+        height: 400px;
+        object-fit: cover;
+        border-radius: 10px;
+        transition: transform 0.2s ease;
+    }
+
+    .shop img:hover {
+        transform: scale(1.05);
+    }
+
+    /* 📱 TABLET */
+    @media (max-width: 1200px) {
         .shop {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 25px;
-            justify-items: center;
-            padding: 20px;
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    /* 📱 HANDY */
+    @media (max-width: 800px) {
+        .shop {
+            grid-template-columns: repeat(2, 1fr);
         }
 
         .shop img {
-            width: 200px;
-            height: 400px;
-            object-fit: cover;
-            border-radius: 10px;
-            transition: transform 0.2s ease;
+            width: 160px;
+            height: 320px;
+        }
+    }
+
+    /* 📱 KLEINES HANDY */
+    @media (max-width: 500px) {
+        .shop {
+            grid-template-columns: repeat(1, 1fr);
         }
 
-        .shop img:hover {
-            transform: scale(1.05);
+        .shop img {
+            width: 220px;
+            height: 350px;
         }
-    </style>
-    """
+    }
+</style>
+"""
 
     return html
 
