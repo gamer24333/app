@@ -220,27 +220,59 @@ def shop():
     ]
 
     html = """
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <body style="background-color:black; color:white; text-align:center;">
+
         <h1>Bill Drinks Shop</h1>
-        <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:25px;">
+
+        <div class="shop">
     """
 
-    for name, img in products[:5]:  # 👈 HIER LIMIT
+    for name, img in products:
         html += f"""
         <a href="/produkt/{name}">
-            <img src="/static/{img}" width="200" style="height:400px; object-fit:cover;">
+            <img src="/static/{img}">
         </a>
         """
 
     html += """
         </div>
+
         <br>
         <a href="/logout" style="color:white;">Logout</a>
+
     </body>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial;
+        }
+
+        .shop {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 25px;
+            justify-items: center;
+            padding: 20px;
+        }
+
+        .shop img {
+            width: 200px;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 10px;
+            transition: transform 0.2s ease;
+        }
+
+        .shop img:hover {
+            transform: scale(1.05);
+        }
+    </style>
     """
 
     return html
-
 
 # 🧃 PRODUKT
 @app.route("/produkt/<name>")
