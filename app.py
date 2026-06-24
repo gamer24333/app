@@ -264,7 +264,7 @@ def delete(id):
     c = conn.cursor()
     if "email" in session:
         c.execute("SELECT * FROM users WHERE rowid = ?", (id,))
-        result = cursor.fetchone()
+        result = c.fetchone()
         gelöschte_email = result[1]
         if session["email"] == gelöschte_email:
             session.clear()
