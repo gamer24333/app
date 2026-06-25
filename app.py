@@ -257,11 +257,11 @@ def shop():
     }
 
     .shop {
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        gap: 25px;
-        justify-items: center;
-        padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+    justify-items: center;
+    padding: 20px;
     }
 
     .shop img {
