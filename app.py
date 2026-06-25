@@ -225,7 +225,9 @@ def shop():
     <body style="background-color:black; color:white; text-align:center;">
 
         <h1>Bill Drinks Shop</h1>
-
+        <a href="/spenden" class="donate-btn">
+            💙 Spenden
+        </a>
         <div class="shop">
     """
 
@@ -301,6 +303,24 @@ def shop():
             height: 350px;
         }
     }
+
+    .donate-btn {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background-color: #ffcc00;
+        color: black;
+        text-decoration: none;
+        padding: 10px 20px;
+        border-radius: 10px;
+        font-weight: bold;
+        z-index: 1000;
+    }
+
+    .donate-btn:hover {
+        opacity: 0.9;
+    }
+    
 </style>
 """
 
@@ -321,6 +341,65 @@ def produkt(name):
 
         <br><br>
         <a href="/shop" style="color:white;">Zurück</a>
+
+    </body>
+    """
+
+
+@app.route("/spenden")
+def spenden():
+    return """
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <body style="
+        background-color:black;
+        color:white;
+        text-align:center;
+        font-family:Arial;
+    ">
+
+        <h1>💙 Bill Drinks unterstützen</h1>
+
+        <p>
+            Mit deiner Spende hilfst du uns dabei,
+            neue Sorten zu entwickeln, Designs zu erstellen
+            und Bill Drinks weiter auszubauen.
+        </p>
+
+        <br>
+
+        <h2>Warum spenden?</h2>
+
+        <p>
+            Jede Unterstützung hilft uns bei:
+        </p>
+
+        <ul style="display:inline-block; text-align:left;">
+            <li>🥤 Entwicklung neuer Geschmacksrichtungen</li>
+            <li>🎨 Design neuer Dosen</li>
+            <li>🌐 Verbesserung der Website</li>
+            <li>📢 Werbung für Bill Drinks</li>
+           
+        </ul>
+
+        <br><br>
+
+        <!-- <a href="DEIN_PAYPAL_LINK"> -->
+            <button onclick="alert('Die Spendenfunktion kommt bald')"style="
+                padding:15px 30px;
+                font-size:18px;
+                border-radius:10px;
+                cursor:pointer;
+            ">
+                💙 Jetzt spenden
+            </button>
+        <!-- </a> -->
+
+        <br><br>
+
+        <a href="/shop" style="color:white;">
+            ⬅ Zurück zum Shop
+        </a>
 
     </body>
     """
