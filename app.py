@@ -211,7 +211,7 @@ def shop():
     if not check_user():
         return redirect("/login")
 
-    products = [
+     products = [
         ("apfel_kirsche", "bill_drinks_apfel_kirsche.jpeg"),
         ("duran_orange", "bill_drinks_duran_orange.jpeg"),
         ("melone_mango", "bill_drinks_melone_mango.jpeg"),
@@ -225,11 +225,11 @@ def shop():
 
     <body style="background-color:black; color:white; text-align:center;">
 
-            <h1>Bill Drinks Shop</h1>
-            <a href="/spenden" class="donate-btn">
-                ❤️ Spenden
-            </a>
-       
+        <h1>Bill Drinks Shop</h1>
+        <a href="/spenden" class="donate-btn">
+            ❤️ Spenden
+        </a>
+        <div class="shop">
     """
 
     for name, img in products:
@@ -254,7 +254,7 @@ def shop():
         overflow-x: hidden;
     }
 
-   .shop {
+    .shop {
         display: grid;
         grid-template-columns: repeat(5, 1fr);
         gap: 25px;
@@ -298,9 +298,6 @@ def shop():
         border-radius: 10px;
         font-weight: bold;
     }
-    
-    
-    
     </style>
     """
 
