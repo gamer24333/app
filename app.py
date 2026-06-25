@@ -1,39 +1,29 @@
 from flask import Flask, request, redirect, session
-import sqlite3
+import psycopg2
 import os
 
 app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY")
 
-DB_PATH = "/opt/render/project/src/daten.db"
+DATABASE_URL = os.environ.get("DATABASE_URL")
 
 
-# 🧱 DB erstellen
-def init_db():
-    conn = sqlite3.connect(DB_PATH)
-    c = conn.cursor()
-    c.execute("""
-    CREATE TABLE IF NOT EXISTS users (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        email TEXT,
-        password TEXT
-    )
-    """)
-    conn.commit()
-    conn.close()
-
-init_db()
+# 🔌 CONNECTION
+def get_conn():
+    return psycopg2.connect(DATABASE_URL)
 
 
-# 🔥 SESSION CHECK (NEU WICHTIG)
+# 🔥 SESSION CHECK
 def check_user():
     if "email" not in session:
         return False
 
-    conn = sqlite3.connect(DB_PATH)
+    conn = get_conn()
     c = conn.cursor()
-    c.execute("SELECT * FROM users WHERE email = ?", (session["email"],))
+
+    c.execute("SELECT * FROM users WHERE email=%s", (session["email"],))
     user = c.fetchone()
+
     conn.close()
 
     if not user:
@@ -50,10 +40,10 @@ def home():
         email = request.form.get("email")
         password = request.form.get("password")
 
-        conn = sqlite3.connect(DB_PATH)
+        conn = get_conn()
         c = conn.cursor()
 
-        c.execute("SELECT * FROM users WHERE email=?", (email,))
+        c.execute("SELECT * FROM users WHERE email=%s", (email,))
         if c.fetchone():
             conn.close()
             return """
@@ -66,7 +56,11 @@ def home():
             </body>
             """
 
-        c.execute("INSERT INTO users (email, password) VALUES (?, ?)", (email, password))
+        c.execute(
+            "INSERT INTO users (email, password) VALUES (%s, %s)",
+            (email, password)
+        )
+
         conn.commit()
         conn.close()
 
@@ -100,7 +94,7 @@ def home():
     """
 
 
-# 🔵 LOGIN (FIXED)
+# 🔵 LOGIN
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if "email" in session:
@@ -110,9 +104,14 @@ def login():
         email = request.form.get("email")
         password = request.form.get("password")
 
-        conn = sqlite3.connect(DB_PATH)
+        conn = get_conn()
         c = conn.cursor()
-        c.execute("SELECT * FROM users WHERE email=? AND password=?", (email, password))
+
+        c.execute(
+            "SELECT * FROM users WHERE email=%s AND password=%s",
+            (email, password)
+        )
+
         user = c.fetchone()
         conn.close()
 
@@ -154,16 +153,18 @@ def logout():
     return redirect("/login")
 
 
-# 📋 LISTE (FIXED mit Check)
+# 📋 LISTE
 @app.route("/liste")
 def liste():
     if not check_user():
         return redirect("/login")
 
-    conn = sqlite3.connect(DB_PATH)
+    conn = get_conn()
     c = conn.cursor()
+
     c.execute("SELECT id, email, password FROM users")
     daten = c.fetchall()
+
     conn.close()
 
     html = """
@@ -189,7 +190,7 @@ def liste():
     return html
 
 
-# 👤 ACCOUNT (FIXED)
+# 👤 ACCOUNT
 @app.route("/account")
 def account():
     if not check_user():
@@ -204,7 +205,7 @@ def account():
     """
 
 
-# 🛒 SHOP (FIXED Schutz)
+# 🛒 SHOP (UNCHANGED)
 @app.route("/shop")
 def shop():
     if not check_user():
@@ -273,35 +274,18 @@ def shop():
         transform: scale(1.05);
     }
 
-    /* 📱 TABLET */
     @media (max-width: 1200px) {
-        .shop {
-            grid-template-columns: repeat(3, 1fr);
-        }
+        .shop { grid-template-columns: repeat(3, 1fr); }
     }
 
-    /* 📱 HANDY */
     @media (max-width: 800px) {
-        .shop {
-            grid-template-columns: repeat(2, 1fr);
-        }
-
-        .shop img {
-            width: 160px;
-            height: 320px;
-        }
+        .shop { grid-template-columns: repeat(2, 1fr); }
+        .shop img { width: 160px; height: 320px; }
     }
 
-    /* 📱 KLEINES HANDY */
     @media (max-width: 500px) {
-        .shop {
-            grid-template-columns: repeat(1, 1fr);
-        }
-
-        .shop img {
-            width: 220px;
-            height: 350px;
-        }
+        .shop { grid-template-columns: repeat(1, 1fr); }
+        .shop img { width: 220px; height: 350px; }
     }
 
     .donate-btn {
@@ -310,21 +294,15 @@ def shop():
         right: 20px;
         background-color: #0000ff;
         color: white;
-        text-decoration: none;
         padding: 10px 20px;
         border-radius: 10px;
         font-weight: bold;
-        z-index: 1000;
     }
-
-    .donate-btn:hover {
-        opacity: 0.9;
-    }
-    
-</style>
-"""
+    </style>
+    """
 
     return html
+
 
 # 🧃 PRODUKT
 @app.route("/produkt/<name>")
@@ -346,75 +324,39 @@ def produkt(name):
     """
 
 
+# 💙 SPENDEN
 @app.route("/spenden")
 def spenden():
     return """
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <body style="
-        background-color:black;
-        color:white;
-        text-align:center;
-        font-family:Arial;
-    ">
+    <body style="background-color:black;color:white;text-align:center;font-family:Arial;">
 
         <h1>❤️ Bill Drinks unterstützen</h1>
 
-        <p>
-            Mit deiner Spende hilfst du uns dabei,
-            neue Sorten zu entwickeln, Designs zu erstellen
-            und Bill Drinks weiter auszubauen.
-        </p>
+        <p>Mit deiner Spende hilfst du uns beim Ausbau.</p>
 
-        <br>
-
-        <h2>Warum spenden?</h2>
-
-        <p>
-            Jede Unterstützung hilft uns bei:
-        </p>
-
-        <ul style="display:inline-block; text-align:left;">
-            <li>🥤 Entwicklung neuer Geschmacksrichtungen</li>
-            <li>🎨 Design neuer Dosen</li>
-            <li>🌐 Verbesserung der Website</li>
-            <li>📢 Werbung für Bill Drinks</li>
-           
-        </ul>
+        <button onclick="alert('Kommt bald')">
+            ❤️ Jetzt spenden
+        </button>
 
         <br><br>
-
-        <!-- <a href="DEIN_PAYPAL_LINK"> -->
-            <button onclick="alert('Die Spendenfunktion kommt bald')"style="
-                padding:15px 30px;
-                font-size:18px;
-                border-radius:10px;
-                cursor:pointer;
-            ">
-                ❤️ Jetzt spenden
-            </button>
-        <!-- </a> -->
-
-        <br><br>
-
-        <a href="/shop" style="color:white;">
-            ⬅ Zurück zum Shop
-        </a>
+        <a href="/shop" style="color:white;">Zurück</a>
 
     </body>
     """
 
 
-# ❌ DELETE (FIXED + SAFE)
+# ❌ DELETE
 @app.route("/delete/<int:id>")
 def delete(id):
     if not check_user():
         return redirect("/login")
 
-    conn = sqlite3.connect(DB_PATH)
+    conn = get_conn()
     c = conn.cursor()
 
-    c.execute("SELECT email FROM users WHERE id = ?", (id,))
+    c.execute("SELECT email FROM users WHERE id=%s", (id,))
     result = c.fetchone()
 
     if not result:
@@ -425,17 +367,17 @@ def delete(id):
         conn.close()
         return "Nicht erlaubt"
 
-    c.execute("DELETE FROM users WHERE id = ?", (id,))
+    c.execute("DELETE FROM users WHERE id=%s", (id,))
     conn.commit()
     conn.close()
 
     session.clear()
 
     return """
-    <body style="background-color:black; color:white; text-align:center;">
+    <body style="background-color:black;color:white;text-align:center;">
         Gelöscht!
         <br>
-        <a href="/login" style="color:white;">Login</a>
+        <a href="/login">Login</a>
     </body>
     """
 
@@ -443,3 +385,4 @@ def delete(id):
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
     app.run(host="0.0.0.0", port=port)
+
