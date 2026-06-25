@@ -226,7 +226,7 @@ def shop():
 
         <h1>Bill Drinks Shop</h1>
         <a href="/spenden" class="donate-btn">
-            💙 Spenden
+            ❤️ Spenden
         </a>
         <div class="shop">
     """
@@ -358,7 +358,7 @@ def spenden():
         font-family:Arial;
     ">
 
-        <h1>💙 Bill Drinks unterstützen</h1>
+        <h1>❤️ Bill Drinks unterstützen</h1>
 
         <p>
             Mit deiner Spende hilfst du uns dabei,
@@ -391,7 +391,7 @@ def spenden():
                 border-radius:10px;
                 cursor:pointer;
             ">
-                💙 Jetzt spenden
+                ❤️ Jetzt spenden
             </button>
         <!-- </a> -->
 
