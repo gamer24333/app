@@ -326,7 +326,7 @@ def produkt(name):
     """
 
 
-# 💙 SPENDEN
+#  ❤️ SPENDEN
 @app.route("/spenden")
 def spenden():
     return """
@@ -339,7 +339,7 @@ def spenden():
         font-family:Arial;
     ">
 
-        <h1>💙 Bill Drinks unterstützen</h1>
+        <h1> ❤️ Bill Drinks unterstützen</h1>
 
         <p>
             Mit deiner Spende hilfst du uns dabei,
@@ -374,7 +374,7 @@ def spenden():
             border-radius:10px;
             cursor:pointer;
         ">
-            💙 Jetzt spenden
+             ❤️ Jetzt spenden
         </button>
 
         <!--
@@ -384,7 +384,7 @@ def spenden():
         <br><br>
 
         <a href="/shop" style="color:white;">
-            ⬅ Zurück zum Shop
+            Zurück zum Shop
         </a>
 
     </body>
