@@ -226,7 +226,7 @@ def shop():
     <body style="background-color:black; color:white; text-align:center;">
 
             <h1>Bill Drinks Shop</h1>
-            <a href="/spenden">
+            <a href="/spenden" class="donate-btn">
                 ❤️ Spenden
             </a>
        
@@ -254,12 +254,12 @@ def shop():
         overflow-x: hidden;
     }
 
-    .shop {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 20px;
-    justify-items: center;
-    padding: 20px;
+   .shop {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 25px;
+        justify-items: center;
+        padding: 20px;
     }
 
     .shop img {
@@ -288,16 +288,15 @@ def shop():
         .shop img { width: 220px; height: 350px; }
     }
 
-   .donate-btn {
-    display: inline-block;
-    margin-top: 10px;
-    background-color: #0000ff;
-    color: white;
-    text-decoration: none;
-    padding: 10px 20px;
-    border-radius: 10px;
-    font-weight: bold;
-
+    .donate-btn {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background-color: #0000ff;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 10px;
+        font-weight: bold;
     }
     
     
