@@ -225,11 +225,13 @@ def shop():
 
     <body style="background-color:black; color:white; text-align:center;">
 
-        <h1>Bill Drinks Shop</h1>
-        <a href="/spenden" class="donate-btn">
-            ❤️ Spenden
-        </a>
-        <div class="shop">
+        <div class="header">
+            <h1>Bill Drinks Shop</h1>
+
+            <a href="/spenden" class="donate-btn">
+                ❤️ Spenden
+            </a>
+        </div>
     """
 
     for name, img in products:
@@ -288,18 +290,22 @@ def shop():
         .shop img { width: 220px; height: 350px; }
     }
 
-    .donate-btn {
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background-color: #ffcc00;
-        color: black;
-        text-decoration: none;
-        padding: 10px 20px;
-        border-radius: 10px;
-        font-weight: bold;
-        z-index: 1000;
+   .donate-btn {
+    background-color: #0000ff;
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-weight: bold;
     }
+
+    .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    }
+    
     </style>
     """
 
