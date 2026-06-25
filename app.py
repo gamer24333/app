@@ -364,17 +364,23 @@ def spenden():
 
         <br><br>
 
-        <a href="DEIN_PAYPAL_LINK">
-            <button style="
-                padding:15px 30px;
-                font-size:18px;
-                border-radius:10px;
-                cursor:pointer;
-            ">
-                💙 Jetzt spenden
-            </button>
-        </a>
+        <!--
+            <a href="DEIN_PAYPAL_LINK">
+        -->
 
+        <button onclick="alert('Die Spendenfunktion kommt bald')" style="
+            padding:15px 30px;
+            font-size:18px;
+            border-radius:10px;
+            cursor:pointer;
+        ">
+            💙 Jetzt spenden
+        </button>
+
+        <!--
+        </a>
+        -->
+        
         <br><br>
 
         <a href="/shop" style="color:white;">
