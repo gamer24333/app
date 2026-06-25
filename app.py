@@ -308,8 +308,8 @@ def shop():
         position: fixed;
         top: 20px;
         right: 20px;
-        background-color: #ffcc00;
-        color: black;
+        background-color: #ff0000;
+        color: white;
         text-decoration: none;
         padding: 10px 20px;
         border-radius: 10px;
