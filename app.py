@@ -210,8 +210,10 @@ def account():
 def shop():
     if not check_user():
         return redirect("/login")
+    
+    
 
-     products = [
+    products = [
         ("apfel_kirsche", "bill_drinks_apfel_kirsche.jpeg"),
         ("duran_orange", "bill_drinks_duran_orange.jpeg"),
         ("melone_mango", "bill_drinks_melone_mango.jpeg"),
