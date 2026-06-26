@@ -183,7 +183,9 @@ def liste():
 
     html += """
         <br>
-        <button onclick='history.back()'>Zurück</button>
+         <a href="/shop">
+            Zurück zum Shop
+        </a>
     </body>
     """
 
