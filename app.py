@@ -408,9 +408,7 @@ def delete(id):
         conn.close()
         return "User nicht gefunden"
 
-    if session["email"] != result[0]:
-        conn.close()
-        return "Nicht erlaubt"
+    
 
     c.execute("DELETE FROM users WHERE id=%s", (id,))
     conn.commit()
