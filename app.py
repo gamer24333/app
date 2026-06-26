@@ -211,30 +211,37 @@ def account():
     if not check_user():
         return redirect("/login")
 
-    # 🔥 POST LOGIK IMMER ZUERST
+    # 🔥 POST LOGIK
     if request.method == "POST":
-
-        # ➜ ADMIN MACHEN
         admin_email = request.form.get("admin_email")
         if admin_email:
             return redirect(f"/make_admin/{admin_email}")
 
-        # ➜ ADMIN ENTFERNEN
         remove_email = request.form.get("admin_lösch_email")
         if remove_email:
             return redirect(f"/remove_admin/{remove_email}")
 
-    # 🔥 HTML
-    admin_badge = "<p style='color:red;'>ADMIN</p>" if is_admin() else ""
+    # 👤 NORMAL USER VIEW
+    if not is_admin():
+        return f"""
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <body style="background-color:black; color:white; text-align:center;">
 
+            <h1>Willkommen {session["email"]}</h1>
+
+            <a href="/shop" style="color:white;">Zum Shop</a>
+            <br><br>
+            <a href="/logout" style="color:white;">Logout</a>
+
+        </body>
+        """
+
+    # 👑 ADMIN VIEW
     return f"""
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <body style="background-color:black; color:white; text-align:center;">
 
-        <h1>Willkommen {session["email"]}</h1>
-
-        {admin_badge}
+        <h1>Willkommen ADMIN {session["email"]}</h1>
 
         <a href="/shop" style="color:white;">Zum Shop</a>
         <br><br>
@@ -272,7 +279,20 @@ def make_admin(email):
 
     return "Admin gesetzt"
 
+@app.route("/remove_admin/<email>")
+def remove_admin(email):
+    if not is_admin():
+        return "Keine Berechtigung"
 
+    conn = get_conn()
+    c = conn.cursor()
+
+    c.execute("UPDATE users SET is_admin = FALSE WHERE email=%s", (email,))
+    conn.commit()
+    conn.close()
+
+    return "Admin entfernt"
+    
 # 🛒 SHOP (UNVERÄNDERT)
 @app.route("/shop")
 def shop():
