@@ -268,16 +268,25 @@ def account():
 @app.route("/make_admin/<email>")
 def make_admin(email):
     if not is_admin():
-        return "No permission"
+        return "Keine Berechtigung"
 
     conn = get_conn()
     c = conn.cursor()
 
+    # 🔍 CHECK: gibt es die Email überhaupt?
+    c.execute("SELECT id FROM users WHERE email=%s", (email,))
+    user = c.fetchone()
+
+    if not user:
+        conn.close()
+        return "User existiert nicht"
+
+    # 👑 Admin setzen
     c.execute("UPDATE users SET is_admin = TRUE WHERE email=%s", (email,))
     conn.commit()
     conn.close()
 
-    return "Admin gesetzt"
+    return f"{email} ist jetzt Admin"
 
 @app.route("/remove_admin/<email>")
 def remove_admin(email):
@@ -287,11 +296,19 @@ def remove_admin(email):
     conn = get_conn()
     c = conn.cursor()
 
+    # 🔍 CHECK
+    c.execute("SELECT id FROM users WHERE email=%s", (email,))
+    user = c.fetchone()
+
+    if not user:
+        conn.close()
+        return "User existiert nicht"
+
     c.execute("UPDATE users SET is_admin = FALSE WHERE email=%s", (email,))
     conn.commit()
     conn.close()
 
-    return "Admin entfernt"
+    return f"{email} ist kein Admin mehr"
     
 # 🛒 SHOP (UNVERÄNDERT)
 @app.route("/shop")
