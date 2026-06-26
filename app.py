@@ -166,7 +166,12 @@ def liste():
 
     # 🔒 NUR ADMIN DARF LISTE SEHEN
     if not is_admin():
-        return "Keine Berechtigung"
+        return """
+        <body style="background:black;color:white;text-align:center;">
+            <h1>⛔ Nur Admin Zugriff</h1>
+            
+        </body>
+                """
 
     
     conn = get_conn()
@@ -180,7 +185,7 @@ def liste():
     html = """
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <body style="background-color:black; color:white; text-align:center;">
-        <h2>Alle Accounts (DEBUG)</h2>
+        <h2>Alle Accounts</h2>
     """
 
     for d in daten:
@@ -212,6 +217,7 @@ def account():
         <h1>Willkommen {session["email"]}</h1>
         {"<p style='color:red;'>ADMIN</p>" if is_admin() else ""}
         <a href="/shop" style="color:white;">Zum Shop</a>
+        <br>
         <a href="/logout" style="color:white;">Logout</a>
     </body>
     """
