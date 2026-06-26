@@ -333,20 +333,62 @@ def produkt(name):
 @app.route("/spenden")
 def spenden():
     return """
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <body style="background-color:black;color:white;text-align:center;font-family:Arial;">
+    <body style="
+        background-color:black;
+        color:white;
+        text-align:center;
+        font-family:Arial;
+    ">
 
-        <h1>❤️ Bill Drinks unterstützen</h1>
+        <h1> ❤️ Bill Drinks unterstützen</h1>
 
-        <p>Mit deiner Spende hilfst du uns beim Ausbau.</p>
+        <p>
+            Mit deiner Spende hilfst du uns dabei,
+            neue Sorten zu entwickeln, Designs zu erstellen
+            und Bill Drinks weiter auszubauen.
+        </p>
 
-        <button onclick="alert('Kommt bald')">
-            ❤️ Jetzt spenden
-        </button>
+        <br>
+
+        <h2>Warum spenden?</h2>
+
+        <p>
+            Jede Unterstützung hilft uns bei:
+        </p>
+
+        <ul style="display:inline-block; text-align:left;">
+            <li>🥤 Entwicklung neuer Geschmacksrichtungen</li>
+            <li>🎨 Design neuer Dosen</li>
+            <li>🌐 Verbesserung der Website</li>
+            <li>📢 Werbung für Bill Drinks</li>
+        </ul>
 
         <br><br>
-        <a href="/shop" style="color:white;">Zurück</a>
+
+        <!--
+            <a href="DEIN_PAYPAL_LINK">
+        -->
+
+        <button onclick="alert('Die Spendenfunktion kommt bald')" style="
+            padding:15px 30px;
+            font-size:18px;
+            border-radius:10px;
+            cursor:pointer;
+        ">
+             ❤️ Jetzt spenden
+        </button>
+
+        <!--
+        </a>
+        -->
+        
+        <br><br>
+
+        <a href="/shop" style="color:white;">
+            Zurück zum Shop
+        </a>
 
     </body>
     """
