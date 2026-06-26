@@ -13,6 +13,11 @@ def get_conn():
     return psycopg2.connect(DATABASE_URL)
 
 
+# 👑 ADMIN CHECK (NEU)
+def is_admin():
+    return session.get("is_admin") == True
+
+
 # 🔥 SESSION CHECK
 def check_user():
     if "email" not in session:
@@ -47,7 +52,6 @@ def home():
         if c.fetchone():
             conn.close()
             return """
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <body style="background-color:black; color:white;">
                 <script>
                     alert("Diese E-Mail existiert bereits!");
@@ -65,7 +69,6 @@ def home():
         conn.close()
 
         return """
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <body style="background-color:black; color:white; text-align:center;">
             <h1>Account erstellt!</h1>
             <a href="/login">Zum Login</a>
@@ -94,7 +97,7 @@ def home():
     """
 
 
-# 🔵 LOGIN
+# 🔵 LOGIN (FIXED ADMIN)
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if "email" in session:
@@ -107,8 +110,9 @@ def login():
         conn = get_conn()
         c = conn.cursor()
 
+        # 🔥 ADMIN MIT LADEN
         c.execute(
-            "SELECT * FROM users WHERE email=%s AND password=%s",
+            "SELECT email, is_admin FROM users WHERE email=%s AND password=%s",
             (email, password)
         )
 
@@ -116,7 +120,8 @@ def login():
         conn.close()
 
         if user:
-            session["email"] = email
+            session["email"] = user[0]
+            session["is_admin"] = user[1]  # 🔥 WICHTIG
             return redirect("/shop")
 
         return """
@@ -183,9 +188,7 @@ def liste():
 
     html += """
         <br>
-         <a href="/shop">
-            Zurück zum Shop
-        </a>
+        <a href="/shop">Zurück zum Shop</a>
     </body>
     """
 
@@ -202,18 +205,17 @@ def account():
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <body style="background-color:black; color:white; text-align:center;">
         <h1>Willkommen {session["email"]}</h1>
+        {"<p style='color:red;'>ADMIN</p>" if is_admin() else ""}
         <a href="/logout" style="color:white;">Logout</a>
     </body>
     """
 
 
-# 🛒 SHOP (UNCHANGED)
+# 🛒 SHOP (UNVERÄNDERT)
 @app.route("/shop")
 def shop():
     if not check_user():
         return redirect("/login")
-    
-    
 
     products = [
         ("apfel_kirsche", "bill_drinks_apfel_kirsche.jpeg"),
@@ -230,9 +232,8 @@ def shop():
     <body style="background-color:black; color:white; text-align:center;">
 
         <h1>Bill Drinks Shop</h1>
-        <a href="/spenden" class="donate-btn">
-            ❤️ Spenden
-        </a>
+        <a href="/spenden" class="donate-btn">❤️ Spenden</a>
+
         <div class="shop">
     """
 
@@ -250,59 +251,6 @@ def shop():
         <a href="/logout" style="color:white;">Logout</a>
 
     </body>
-
-    <style>
-    body {
-        margin: 0;
-        font-family: Arial;
-        overflow-x: hidden;
-    }
-
-    .shop {
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        gap: 25px;
-        justify-items: center;
-        padding: 20px;
-    }
-
-    .shop img {
-        width: 200px;
-        height: 400px;
-        object-fit: cover;
-        border-radius: 10px;
-        transition: transform 0.2s ease;
-    }
-
-    .shop img:hover {
-        transform: scale(1.05);
-    }
-
-    @media (max-width: 1200px) {
-        .shop { grid-template-columns: repeat(3, 1fr); }
-    }
-
-    @media (max-width: 800px) {
-        .shop { grid-template-columns: repeat(2, 1fr); }
-        .shop img { width: 160px; height: 320px; }
-    }
-
-    @media (max-width: 500px) {
-        .shop { grid-template-columns: repeat(1, 1fr); }
-        .shop img { width: 220px; height: 350px; }
-    }
-
-    .donate-btn {
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background-color: #0000ff;
-        color: white;
-        padding: 10px 20px;
-        border-radius: 10px;
-        font-weight: bold;
-    }
-    </style>
     """
 
     return html
@@ -312,93 +260,31 @@ def shop():
 @app.route("/produkt/<name>")
 def produkt(name):
     return f"""
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <body style="background-color:black; color:white; text-align:center;">
-
         <h1>{" ".join(name.split("_")).title()}</h1>
-
-        <p>Preis: 1,99 €</p>
-
-        <button onclick="alert('Die kaufen Funktion kommt bald!')">Kaufen</button>
-
-        <br><br>
-        <a href="/shop" style="color:white;">Zurück</a>
-
     </body>
     """
 
 
-#  ❤️ SPENDEN
+# 💙 SPENDEN
 @app.route("/spenden")
 def spenden():
     return """
-     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <body style="
-        background-color:black;
-        color:white;
-        text-align:center;
-        font-family:Arial;
-    ">
-
-        <h1> ❤️ Bill Drinks unterstützen</h1>
-
-        <p>
-            Mit deiner Spende hilfst du uns dabei,
-            neue Sorten zu entwickeln, Designs zu erstellen
-            und Bill Drinks weiter auszubauen.
-        </p>
-
-        <br>
-
-        <h2>Warum spenden?</h2>
-
-        <p>
-            Jede Unterstützung hilft uns bei:
-        </p>
-
-        <ul style="display:inline-block; text-align:left;">
-            <li>🥤 Entwicklung neuer Geschmacksrichtungen</li>
-            <li>🎨 Design neuer Dosen</li>
-            <li>🌐 Verbesserung der Website</li>
-            <li>📢 Werbung für Bill Drinks</li>
-        </ul>
-
-        <br><br>
-
-        <!--
-            <a href="DEIN_PAYPAL_LINK">
-        -->
-
-        <button onclick="alert('Die Spendenfunktion kommt bald')" style="
-            padding:15px 30px;
-            font-size:18px;
-            border-radius:10px;
-            cursor:pointer;
-        ">
-             ❤️ Jetzt spenden
-        </button>
-
-        <!--
-        </a>
-        -->
-        
-        <br><br>
-
-        <a href="/shop" style="color:white;">
-            Zurück zum Shop
-        </a>
-
+    <body style="background:black;color:white;text-align:center;">
+        <h1>Spenden</h1>
     </body>
     """
-    
 
 
-# ❌ DELETE
+# ❌ DELETE (🔥 NUR ADMIN)
 @app.route("/delete/<int:id>")
 def delete(id):
     if not check_user():
         return redirect("/login")
+
+    # 🔥 ADMIN CHECK
+    if not is_admin():
+        return "Keine Berechtigung"
 
     conn = get_conn()
     c = conn.cursor()
@@ -410,23 +296,18 @@ def delete(id):
         conn.close()
         return "User nicht gefunden"
 
-    
-
     c.execute("DELETE FROM users WHERE id=%s", (id,))
     conn.commit()
     conn.close()
-    
+
     if result[0] == session["email"]:
-         session.clear()
-   
+        session.clear()
 
     return """
     <body style="background-color:black;color:white;text-align:center;">
         Gelöscht!
         <br><br>
-         <a href="/liste">
-            Zurück
-        </a>
+        <a href="/liste">Zurück</a>
     </body>
     """
 
@@ -434,4 +315,3 @@ def delete(id):
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
     app.run(host="0.0.0.0", port=port)
-
