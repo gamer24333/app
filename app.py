@@ -217,7 +217,7 @@ def account():
         <h1>Willkommen {session["email"]}</h1>
         {"<p style='color:red;'>ADMIN</p>" if is_admin() else ""}
         <a href="/shop" style="color:white;">Zum Shop</a>
-        <br>
+        <br><br>
         <a href="/logout" style="color:white;">Logout</a>
     </body>
     """
