@@ -101,7 +101,7 @@ def home():
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if "email" in session:
-        return redirect("/shop")
+        return redirect("/account")
 
     if request.method == "POST":
         email = request.form.get("email")
@@ -164,6 +164,11 @@ def liste():
     if not check_user():
         return redirect("/login")
 
+    # 🔒 NUR ADMIN DARF LISTE SEHEN
+    if not is_admin():
+        return "Keine Berechtigung"
+
+    
     conn = get_conn()
     c = conn.cursor()
 
