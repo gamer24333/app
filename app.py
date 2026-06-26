@@ -413,14 +413,18 @@ def delete(id):
     c.execute("DELETE FROM users WHERE id=%s", (id,))
     conn.commit()
     conn.close()
-
-    session.clear()
+    
+    if result[0] == session["email"]:
+         session.clear()
+   
 
     return """
     <body style="background-color:black;color:white;text-align:center;">
         Gelöscht!
-        <br>
-        <a href="/login">Login</a>
+        <br><br>
+         <a href="/liste">
+            Zurück
+        </a>
     </body>
     """
 
