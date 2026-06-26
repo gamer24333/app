@@ -122,7 +122,7 @@ def login():
         if user:
             session["email"] = user[0]
             session["is_admin"] = user[1]  # 🔥 WICHTIG
-            return redirect("/shop")
+            return redirect("/account")
 
         return """
         <body style="background-color:black; color:white; text-align:center;">
@@ -206,6 +206,7 @@ def account():
     <body style="background-color:black; color:white; text-align:center;">
         <h1>Willkommen {session["email"]}</h1>
         {"<p style='color:red;'>ADMIN</p>" if is_admin() else ""}
+        <a href="/shop" style="color:white;">Zum Shop</a>
         <a href="/logout" style="color:white;">Logout</a>
     </body>
     """
@@ -232,8 +233,9 @@ def shop():
     <body style="background-color:black; color:white; text-align:center;">
 
         <h1>Bill Drinks Shop</h1>
-        <a href="/spenden" class="donate-btn">❤️ Spenden</a>
-
+        <a href="/spenden" class="donate-btn">
+            ❤️ Spenden
+        </a>
         <div class="shop">
     """
 
@@ -251,27 +253,101 @@ def shop():
         <a href="/logout" style="color:white;">Logout</a>
 
     </body>
+
+    <style>
+    body {
+        margin: 0;
+        font-family: Arial;
+        overflow-x: hidden;
+    }
+
+    .shop {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 25px;
+        justify-items: center;
+        padding: 20px;
+    }
+
+    .shop img {
+        width: 200px;
+        height: 400px;
+        object-fit: cover;
+        border-radius: 10px;
+        transition: transform 0.2s ease;
+    }
+
+    .shop img:hover {
+        transform: scale(1.05);
+    }
+
+    @media (max-width: 1200px) {
+        .shop { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    @media (max-width: 800px) {
+        .shop { grid-template-columns: repeat(2, 1fr); }
+        .shop img { width: 160px; height: 320px; }
+    }
+
+    @media (max-width: 500px) {
+        .shop { grid-template-columns: repeat(1, 1fr); }
+        .shop img { width: 220px; height: 350px; }
+    }
+
+    .donate-btn {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background-color: #0000ff;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 10px;
+        font-weight: bold;
+    }
+    </style>
     """
 
     return html
-
 
 # 🧃 PRODUKT
 @app.route("/produkt/<name>")
 def produkt(name):
     return f"""
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <body style="background-color:black; color:white; text-align:center;">
+
         <h1>{" ".join(name.split("_")).title()}</h1>
+
+        <p>Preis: 1,99 €</p>
+
+        <button onclick="alert('Die kaufen Funktion kommt bald!')">Kaufen</button>
+
+        <br><br>
+        <a href="/shop" style="color:white;">Zurück</a>
+
     </body>
     """
-
 
 # 💙 SPENDEN
 @app.route("/spenden")
 def spenden():
     return """
-    <body style="background:black;color:white;text-align:center;">
-        <h1>Spenden</h1>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <body style="background-color:black;color:white;text-align:center;font-family:Arial;">
+
+        <h1>❤️ Bill Drinks unterstützen</h1>
+
+        <p>Mit deiner Spende hilfst du uns beim Ausbau.</p>
+
+        <button onclick="alert('Kommt bald')">
+            ❤️ Jetzt spenden
+        </button>
+
+        <br><br>
+        <a href="/shop" style="color:white;">Zurück</a>
+
     </body>
     """
 
