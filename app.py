@@ -428,7 +428,7 @@ def shop():
     align-items: center;
     justify-content: space-between;
 
-    padding: 10px 15px;
+    padding: 15px 40px;
     box-sizing: border-box;
     
     background: rgba(0, 0, 0, 0.9);
@@ -446,7 +446,7 @@ def shop():
     .spenden-btn {
     background-color: #0000ff;
     color: white;
-    padding: 5px 10px;
+    padding: 10px 15px;
     border-radius: 8px;
     text-decoration: none;
     font-weight: bold;
