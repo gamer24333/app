@@ -352,7 +352,7 @@ def shop():
             <h1 class="title">Bill Drinks Shop</h1>
 
             <div class="right-buttons">
-                <a href="/account">Account</a>
+                <a href="/account">Zurück</a>
             </div>
         </div>
         <div class="shop">
