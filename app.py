@@ -346,11 +346,15 @@ def shop():
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <body style="background-color:black; color:white; text-align:center;">
-
-        <h1>Bill Drinks Shop</h1>
-        <a href="/spenden" class="donate-btn">
-            ❤️ Spenden
-        </a>
+        <div class= ""donate-btn"">
+            <h1>Bill Drinks Shop</h1>
+            <a href="/spenden">
+                ❤️ Spenden
+            </a>
+            <a href="/account">
+                Zurück
+            </a>
+        </div>
         <div class="shop">
     """
 
