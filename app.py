@@ -448,7 +448,7 @@ def shop():
     padding: 10px 15px;
     border-radius: 8px;
     text-decoration: none;
-    font-weight: bold;
+    /*font-weight: bold;*/
     
 }
 
