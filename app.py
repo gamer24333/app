@@ -415,11 +415,14 @@ def shop():
         .shop img { width: 220px; height: 350px; }
     }
 
-    
+    @media (max-width: 600px) {
     .header {
     position: fixed;
     top: 0;
     left: 0;
+
+    flex-direction: column;
+    gap: 8px;
     
     width: 100%;
     transform: translateX(-10px); /* 🔥 nach links schieben */
@@ -457,6 +460,7 @@ def shop():
     display: flex;
     gap: 15px;
     padding-right: 20px;
+}
 }
     </style>
     """
