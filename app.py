@@ -420,9 +420,6 @@ def shop():
     position: fixed;
     top: 0;
     left: 0;
-
-    flex-direction: column;
-    gap: 8px;
     
     width: 100%;
     transform: translateX(-10px); /* 🔥 nach links schieben */
