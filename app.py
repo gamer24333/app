@@ -85,7 +85,7 @@ def home():
         <h1>Register</h1>
 
         <form method="post">
-            <input name="email" placeholder="Email"><br><br>
+            <input name="email" placeholder="Email" minlength="3"><br><br>
             <input type="password" name="password" placeholder="Passwort"><br><br>
             <button>Registrieren</button>
         </form>
