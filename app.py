@@ -191,7 +191,7 @@ def liste():
     daten = c.fetchall()
     conn.close()
 
-    html += """
+    html = """
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <body style="background-color:black; color:white; text-align:center;">
 
