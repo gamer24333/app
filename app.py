@@ -346,14 +346,14 @@ def shop():
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <body style="background-color:black; color:white; text-align:center;">
-        <div class= "donate-btn">
-            <h1>Bill Drinks Shop</h1>
-            <a href="/spenden">
-                ❤️ Spenden
-            </a>
-            <a href="/account">
-                Zurück
-            </a>
+        <div class="header">
+            <a href="/spenden" class="spenden-btn">❤️ Spenden</a>
+
+            <h1 class="title">Bill Drinks Shop</h1>
+
+            <div class="right-buttons">
+                <a href="/account">Account</a>
+            </div>
         </div>
         <div class="shop">
     """
@@ -428,6 +428,40 @@ def shop():
     flex-direction: column;
     gap: 8px;
     text-align: center;
+}
+    .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 15px 25px;
+    background-color: black;
+    z-index: 1000;
+}
+    .title {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    margin: 0;
+}
+    .spenden-btn {
+    background-color: #0000ff;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+}
+    .right-buttons a {
+    color: white;
+    text-decoration: none;
+    margin-left: 15px;
 }
     </style>
     """
