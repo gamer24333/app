@@ -425,7 +425,7 @@ def shop():
     align-items: center;
     justify-content: space-between;
 
-    padding: 15px 40px;
+    padding: 15px 25px;
     background-color: black;
     z-index: 1000;
 }
@@ -445,9 +445,9 @@ def shop():
     font-weight: bold;
 }
     .right-buttons a {
-    color: white;
-    text-decoration: none;
-    margin-left: 15px;
+    display: flex;
+    gap: 15px;
+    padding-right: 20px;
 }
     </style>
     """
