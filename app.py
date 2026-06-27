@@ -174,18 +174,35 @@ def liste():
                 """
 
     
+    search = request.args.get("q")
+
     conn = get_conn()
     c = conn.cursor()
 
-    c.execute("SELECT id, email, password FROM users")
-    daten = c.fetchall()
+    # 🔍 wenn gesucht wird → filter
+    if search:
+        c.execute(
+            "SELECT id, email, password FROM users WHERE email ILIKE %s",
+            (f"%{search}%",)
+        )
+    else:
+        c.execute("SELECT id, email, password FROM users")
 
+    daten = c.fetchall()
     conn.close()
 
-    html = """
+    html += """
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <body style="background-color:black; color:white; text-align:center;">
-        <h2>Alle Accounts</h2>
+
+        <h2>Alle Accounts (ADMIN)</h2>
+
+        <form method="get">
+            <input name="q" placeholder="Email suchen">
+            <button type="submit">Suchen</button>
+        </form>
+
+        <br>
     """
 
     for d in daten:
@@ -198,7 +215,7 @@ def liste():
 
     html += """
         <br>
-        <button onclick="window.history.back()">Zurück</button>
+        <a href="/account">Zurück</a>
     </body>
     """
 
