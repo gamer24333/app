@@ -415,7 +415,7 @@ def shop():
         .shop img { width: 220px; height: 350px; }
     }
 
-    @media (max-width: 600px) {
+    
     .header {
     position: fixed;
     top: 0;
@@ -448,7 +448,7 @@ def shop():
     padding: 10px 15px;
     border-radius: 8px;
     text-decoration: none;
-    /*font-weight: bold;*/
+    font-weight: bold;
     
 }
 
@@ -458,7 +458,7 @@ def shop():
     gap: 15px;
     padding-right: 20px;
 }
-}
+
     </style>
     """
 
