@@ -437,7 +437,6 @@ def shop():
 }
     .title {
     position: absolute;
-    font-size: 16px;
     left: 50%;
     transform: translateX(-50%);
     color: white;
