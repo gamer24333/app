@@ -450,7 +450,7 @@ def shop():
     border-radius: 8px;
     text-decoration: none;
     font-weight: bold;
-    font-size: 12px;
+    
 }
 }
     .right-buttons a {
