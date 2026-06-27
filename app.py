@@ -86,7 +86,7 @@ def home():
 
         <form method="post">
             <input name="email" placeholder="Email" minlength="3" required><br><br>
-            <input type="password" name="password" placeholder="Passwort" minlength="3" required><br><br>
+            <input type="password" name="password" placeholder="Passwort" minlength="4" required><br><br>
             <button>Registrieren</button>
         </form>
 
