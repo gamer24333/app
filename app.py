@@ -415,7 +415,7 @@ def shop():
         .shop img { width: 220px; height: 350px; }
     }
 
-    @media (max-width: 600px) {
+    
     .header {
     position: fixed;
     top: 0;
@@ -451,7 +451,7 @@ def shop():
     font-weight: bold;
     
 }
-}
+
     .right-buttons a {
     color: white;
     display: flex;
