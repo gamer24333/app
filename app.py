@@ -430,7 +430,7 @@ def shop():
     padding: 15px 40px;
     box-sizing: border-box;
     
-    background-color: black;
+    background: rgba(0, 0, 0, 0.9);
     z-index: 9999; /* 🔥 WICHTIG */
     
 }
