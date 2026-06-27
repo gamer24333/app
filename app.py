@@ -414,21 +414,7 @@ def shop():
         .shop img { width: 220px; height: 350px; }
     }
 
-    .donate-btn {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background-color: #0000ff;
-    color: white;
-    padding: 12px 15px;
-    border-radius: 10px;
-    font-weight: bold;
-
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    text-align: center;
-}
+    
     .header {
     position: fixed;
     top: 0;
@@ -439,7 +425,7 @@ def shop():
     align-items: center;
     justify-content: space-between;
 
-    padding: 15px 25px;
+    padding: 15px 40px;
     background-color: black;
     z-index: 1000;
 }
