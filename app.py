@@ -419,15 +419,19 @@ def shop():
     position: fixed;
     top: 0;
     left: 0;
+    
     width: 100%;
-
+    transform: translateX(-10px); /* 🔥 nach links schieben */
+    
     display: flex;
     align-items: center;
     justify-content: space-between;
 
-    padding: 15px 25px;
+    padding: 15px 40px;
+    box-sizing: border-box;
+    
     background-color: black;
-    z-index: 1000;
+    
 }
     .title {
     position: absolute;
