@@ -431,6 +431,7 @@ def shop():
     box-sizing: border-box;
     
     background-color: black;
+    z-index: 9999; /* 🔥 WICHTIG */
     
 }
     .title {
@@ -449,6 +450,7 @@ def shop():
     font-weight: bold;
 }
     .right-buttons a {
+    color: white;
     display: flex;
     gap: 15px;
     padding-right: 20px;
