@@ -340,6 +340,7 @@ def shop():
         ("pflaume_kokosnuss", "bill_drinks_pflaume_kokosnuss.jpeg"),
         ("ananas_drachenfrucht", "bill_drinks_ananas_drachenfrucht.jpeg"),
         ("erdbeere_blaubeere", "bill_drinks_erdbeere_blaubeere.jpeg"),
+        ("pfirsich_kiwi", "bill_drinks_pfirsich_kiwi.jpeg")
     ]
 
     html = """
