@@ -415,7 +415,7 @@ def shop():
         .shop img { width: 220px; height: 350px; }
     }
 
-    
+    @media (max-width: 600px) {
     .header {
     position: fixed;
     top: 0;
@@ -428,7 +428,7 @@ def shop():
     align-items: center;
     justify-content: space-between;
 
-    padding: 15px 40px;
+    padding: 10px 15px;
     box-sizing: border-box;
     
     background: rgba(0, 0, 0, 0.9);
@@ -437,6 +437,7 @@ def shop():
 }
     .title {
     position: absolute;
+    font-size: 16px;
     left: 50%;
     transform: translateX(-50%);
     color: white;
@@ -445,10 +446,12 @@ def shop():
     .spenden-btn {
     background-color: #0000ff;
     color: white;
-    padding: 8px 15px;
+    padding: 5px 10px;
     border-radius: 8px;
     text-decoration: none;
     font-weight: bold;
+    font-size: 12px;
+}
 }
     .right-buttons a {
     color: white;
