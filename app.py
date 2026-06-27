@@ -346,7 +346,7 @@ def shop():
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <body style="background-color:black; color:white; text-align:center;">
-        <div class= ""donate-btn"">
+        <div class= "donate-btn">
             <h1>Bill Drinks Shop</h1>
             <a href="/spenden">
                 ❤️ Spenden
@@ -415,15 +415,20 @@ def shop():
     }
 
     .donate-btn {
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background-color: #0000ff;
-        color: white;
-        padding: 10px 20px;
-        border-radius: 10px;
-        font-weight: bold;
-    }
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #0000ff;
+    color: white;
+    padding: 12px 15px;
+    border-radius: 10px;
+    font-weight: bold;
+
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+}
     </style>
     """
 
