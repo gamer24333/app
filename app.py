@@ -140,7 +140,7 @@ def login():
 
         <form method="post">
             <input name="email" placeholder="Email"><br><br>
-            <input type="password" name="password" placeholder="Passwort"><br><br>
+            <input type="password" name="password" placeholder="Passwort" minlength="4"><br><br>
             <button>Login</button>
         </form>
 
