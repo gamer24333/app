@@ -426,6 +426,7 @@ def shop():
     
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
     justify-content: space-between;
 
     padding: 15px 40px;
