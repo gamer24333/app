@@ -422,7 +422,7 @@ def shop():
     left: 0;
     
     width: 100%;
-    transform: translateX(-10px); /* 🔥 nach links schieben */
+    /*transform: translateX(-10px); /* 🔥 nach links schieben */*/
     
     display: flex;
     align-items: center;
@@ -437,7 +437,7 @@ def shop():
     
 }
     .title {
-    position: absolute;
+    /*position: absolute;*/
     left: 50%;
     transform: translateX(-50%);
     color: white;
