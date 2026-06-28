@@ -415,7 +415,7 @@ def shop():
         .shop img { width: 220px; height: 350px; }
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 300px) {
     .header {
     position: fixed;
     top: 0;
