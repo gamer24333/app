@@ -426,7 +426,7 @@ def shop():
     
     display: flex;
     align-items: center;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     justify-content: space-between;
 
     padding: 15px 40px;
@@ -456,7 +456,6 @@ def shop():
     .right-buttons a {
     color: white;
     display: flex;
-    gap: 15px;
     padding-right: 20px;
 }
 }
